@@ -1,7 +1,7 @@
 //Dependencies
-var express = require "express";
-var bp = require "body-parser";
-var path = require "path";
+var express = require ("express");
+var bp = require ("body-parser");
+var path = require ("path");
 
 // Sets up Express 
 var app = express();
@@ -19,12 +19,12 @@ Your server.js file should require the basic npm packages we've used in class: e
 $("//form").on("submit", function(){
 	var formName = $("//nameField");
 	var formPhotoURL = $("//photoField");
-	var formScores = //.currentTarget??
-	var friendObject = new Friend (formName, formPhotoURL, formScores);
+	var formScores; // = .currentTarget??
+	var friendObject = new Friend(formName, formPhotoURL, formScores);
 
 	$.post("/api/friends", friendObject).done(function(response){
 		//Display matched user onscreen using modal
-		console.log("matched friend:" + response)
+		console.log("matched friend:" + response);
 	});
 });
 
@@ -127,8 +127,8 @@ var friendsArray = [
 		    5,
 		    4,
 		    1
-		];
-	};
+		]
+	},
 ];
 
 //===========friends.js=====================\\
