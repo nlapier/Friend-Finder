@@ -14,7 +14,7 @@ module.exports = function(app){
 	});
 
 	app.post("/api/friends", function(request, response){
-		console.log(request.body);
+		console.log("request.body: " + request.body);
 		// //Add new user object
 		// var friendObj = new Friend(request.body);
 
