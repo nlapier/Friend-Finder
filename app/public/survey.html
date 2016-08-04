@@ -34,9 +34,27 @@
 				</h4>
 				
 			</form>
-
-
 		</div>
+<!-- 
+		<div class="modal fade" tabindex="-1" role="dialog" id="testModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Best Match</h4>
+      </div>
+      <div class="modal-body">
+        <h2 id="matchName">Name</h2>
+        <img id="matchImg" src="//response.photoURL" alt="//response.name">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ -->
 		<!-- My JS --><script type="text/javascript">
 
 		var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
@@ -59,13 +77,13 @@
 				}
 
     			// var q1 = $("input[name=options1]:checked").val();
-    			console.log(newFriendObj)
+    			console.log("newFriendObj: " + JSON.stringify(newFriendObj, null, 2))
 
 				$.post("/api/friends", newFriendObj, function(response){
 					console.log(".post response: " + JSON.stringify(response, null, 2));
 					modalIt(response.name, response.photoURL);
+					// $("#testModal").modal("show");
 				});
-
 
 				return false;
 			});
@@ -73,7 +91,7 @@
 			function modalIt(name, photo){
 			    //Modal container divs
 			  var modalMain = $("<div>").attr({
-			    class: "modal-fade",
+			    class: "modal fade",
 			    id: "matchModal",
 			    tabindex: "-1",
 			    role:"dialog"
@@ -96,9 +114,9 @@
 			  var modalMatchName = $("<div id = 'matchName'>").text(name);
 			  var modalIMG = $("<img>").attr({
 			    id:"matchImg",
-			    src:photo,
-			    alt:name
-			  })
+			    src: photo,
+			    alt: name
+			  });
 			  modalBody.append(modalMatchName);
 			  modalBody.append(modalIMG);
 
@@ -107,7 +125,7 @@
 			  var closeButton = $("<button>").attr({
 			    type:"button",
 			    class:"btn btn-default",
-			    data-dismiss:"modal"
+			    "data-dismiss":"modal"
 			  });
 			  closeButton.text("Close");
 			  modalFooter.append(closeButton);
@@ -119,42 +137,47 @@
 			  modalMain.append(modalBody);
 			  modalMain.append(modalFooter);
 
-			  $('#matchModal').modal(options);
+			  $("body").append(modalMain);
+
+			  console.log("go modal!");
+			  $("#matchModal").modal("show");
 			}
 
 			function makeSurvey(inputArray){
-			var radioDiv = $("<div>");
-			var button = $("<button>").attr({
-			type:"submit",
-			class:"btn btn-default"
-			});
-			button.text("Submit");
+				var radioDiv = $("<div>");
+				var button = $("<button>").attr({
+				type:"submit",
+				class:"btn btn-default"
+				});
+				button.text("Submit");
 
-			inputArray.forEach(function(currentValue, index, array){
-			var questionNumber = index+1;
-			var main = $("<div class='questionsDiv'");
-			var h3 = $("<h3>").text("Statement " + questionNumber);
-			var h4 = $("<h4>").text(currentValue);
-			main.append(h3);
-			main.append(h4);
+				inputArray.forEach(function(currentValue, index, array){
+					var questionNumber = index+1;
+					var main = $("<div class='questionsDiv'>");
+					var h3 = $("<h3>").text("Statement " + questionNumber);
+					var h4 = $("<h4>").text(currentValue);
+					main.append(h3);
+					main.append(h4);
 
-			for (var i = 1; i <= 5; i++){
-			  var label = $("<label class='radio-inline'");
-			  var input = $("<input>").attr({
-			    type:"radio",
-			    name: "options " + questionNumber,
-			    value: i
-			  })
+					for (var i = 1; i <= 5; i++){
+					  var label = $("<label class='radio-inline'>");
+					  var input = $("<input>").attr({
+					    type:"radio",
+					    name: "options" + questionNumber,
+					    value: i
+					  })
 
-			  label.append(input);
-			  main.append(label);
-			}  
-			radioDiv.append(main);
-			})
+					  label.append(input);
+					  main.append(label);
+					}  
+					radioDiv.append(main);
+				})
 
-  $("form").append(radioDiv);
-  $("form").append(button);
-}
+			  $("form").append(radioDiv);
+			  $("form").append($("<br>"));
+			  $("form").append(button);
+			  console.log("makeSurvey Done")
+			}
 		</script> 
 	</body>
 </html>

@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog">
+<div class="modal fade" tabindex="-1" role="dialog" id="testModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,7 +6,7 @@
         <h4 class="modal-title">Best Match</h4>
       </div>
       <div class="modal-body">
-        <h2 id="matchName">//response.name</h2>
+        <h2 id="matchName">Name</h2>
         <img id="matchImg" src="//response.photoURL" alt="//response.name">
       </div>
       <div class="modal-footer">
@@ -51,7 +51,7 @@ function makeSurvey(inputArray){
     class:"btn btn-default"
   });
   button.text("Submit");
-  
+
   inputArray.forEach(function(currentValue, index, array){
     var questionNumber = index+1;
     var main = $("<div class='questionsDiv'");
