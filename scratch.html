@@ -1,0 +1,68 @@
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Best Match</h4>
+      </div>
+      <div class="modal-body">
+        <h2 id="matchName">//response.name</h2>
+        <img id="matchImg" src="//response.photoURL" alt="//response.name">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script type="text/javascript">
+  //Modal container divs
+  var modalMain = $("<div>").attr({
+    class: "modal fade",
+    tabindex: "-1",
+    role:"dialog"
+  });
+  var modalDialog = $("<div>").attr({
+    class: "modal-dialog",
+    role:"document"
+  });
+  var modalContent = $("<div class = 'modal-content'>");
+
+
+  //Modal header
+  var modalHeader = $("<div>").attr({
+    class: "modal-header"
+  });
+  var headerText = $("<h4 class = 'modal-title'>").text("Best Match");
+  modalHeader.append(headerText);
+
+  //Modal body
+  var modalBody = $("<div class = 'modal-body'>");
+  var modalMatchName = $("<div id = 'matchName'>").text(response.name);
+  var modalIMG = $("<img>").attr({
+    id:"matchImg",
+    src:response.photoURL,
+    alt:response.name
+  })
+  modalBody.append(modalMatchName);
+  modalBody.append(modalIMG);
+
+  //Modal Footer
+  var modalFooter = $("<div class='modal-footer'>");
+  var closeButton = $("<button>").attr({
+    type:"button",
+    class:"btn btn-default",
+    data-dismiss:"modal"
+  });
+  closeButton.text("Close");
+  modalFooter.append(closeButton);
+
+  //Putting it all together
+
+
+
+
+
+</script>
