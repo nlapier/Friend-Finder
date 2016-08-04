@@ -16,11 +16,75 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<div class= "questionDiv">
+  <h3>
+    <strong>Question 1</strong>
+  </h3>
+  <h4>
+    Your mind is always buzzing with unexplored ideas and plans.
+  </h4>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="1"> 1 (Strongly Disagree)
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="2"> 2
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="3"> 3
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="4"> 4
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="5"> 5 (Strongly Agree)
+  </label>
+</div>
+
+
 
 <script type="text/javascript">
+
+function makeSurvey(inputArray){
+  var radioDiv = $("<div>");
+  var button = $("<button>").attr({
+    type:"submit",
+    class:"btn btn-default"
+  });
+  button.text("Submit");
+  
+  inputArray.forEach(function(currentValue, index, array){
+    var questionNumber = index+1;
+    var main = $("<div class='questionsDiv'");
+    var h3 = $("<h3>").text("Statement " + questionNumber);
+    var h4 = $("<h4>").text(currentValue);
+    main.append(h3);
+    main.append(h4);
+
+    for (var i = 1; i <= 5; i++){
+      var label = $("<label class='radio-inline'");
+      var input = $("<input>").attr({
+        type:"radio",
+        name: "options " + questionNumber,
+        value: i
+      })
+
+      label.append(input);
+      main.append(label);
+    }  
+    radioDiv.append(main);
+  })
+
+  $("form").append(radioDiv);
+  $("form").append(button);
+}
+
+
+
+function modalIt(name, photo){
   //Modal container divs
   var modalMain = $("<div>").attr({
-    class: "modal fade",
+    class: "modal-fade",
+    id: "matchModal",
     tabindex: "-1",
     role:"dialog"
   });
@@ -29,7 +93,6 @@
     role:"document"
   });
   var modalContent = $("<div class = 'modal-content'>");
-
 
   //Modal header
   var modalHeader = $("<div>").attr({
@@ -40,11 +103,11 @@
 
   //Modal body
   var modalBody = $("<div class = 'modal-body'>");
-  var modalMatchName = $("<div id = 'matchName'>").text(response.name);
+  var modalMatchName = $("<div id = 'matchName'>").text(name);
   var modalIMG = $("<img>").attr({
     id:"matchImg",
-    src:response.photoURL,
-    alt:response.name
+    src:photo,
+    alt:name
   })
   modalBody.append(modalMatchName);
   modalBody.append(modalIMG);
@@ -60,8 +123,14 @@
   modalFooter.append(closeButton);
 
   //Putting it all together
+  modalMain.append(modalDialog);
+  modalMain.append(modalContent);
+  modalMain.append(modalHeader);
+  modalMain.append(modalBody);
+  modalMain.append(modalFooter);
 
-
+  $('#matchModal').modal(options);
+}
 
 
 
