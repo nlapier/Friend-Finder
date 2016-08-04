@@ -14,18 +14,20 @@ module.exports = function(app){
 	});
 
 	app.post("/api/friends", function(request, response){
-		console.log("request.body: " + request.body);
 		// //Add new user object
-		// var friendObj = new Friend(request.body);
+		var incoming = request.body;
+		var friendObj = new Friend (incoming.name, incoming.photoURL, incoming.scores)
+		console.log("friendObj: " + JSON.stringify(friendObj, null, 2));
 
-		// //run totalDifference()
-		// friendObj.totalDifference();
+		//run totalDifference(
+		friendObj.totalDifference();
+		console.log("friendObj.bestMatch: " + friendObj.bestMatch);
 
-		// //Push new user to friendsArray
-		// friendsArray.push(friendObj);
+		//Push new user to friendsArray
+		friendsArray.push(friendObj);
 
-		// //Send back the matched user
-		// response.json(friendObj.bestMatch);
+		//Send back the matched user
+		response.json(friendObj.bestMatch);
 	});
 
 }

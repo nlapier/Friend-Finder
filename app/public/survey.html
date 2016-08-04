@@ -20,12 +20,12 @@
 
 			<form>
 				<div class="form-group">
-					<label for="exampleInputEmail1">Your Name (Required)</label>
-					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+					<label for="name">Your Name (Required)</label>
+					<input type="text" class="form-control" id="nameInput" placeholder="Name">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Link to Photo Image (Required)</label>
-					<input type="url" class="form-control" id="exampleInputPassword1" placeholder="Image URL">
+					<label for="photo">Link to Photo Image (Required)</label>
+					<input type="url" class="form-control" id="urlInput" placeholder="Image URL">
 				</div>
 
 				<div class= "questionDiv">
@@ -36,19 +36,19 @@
 						Your mind is always buzzing with unexplored ideas and plans.
 					</h4>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" value="option1"> 1 (Strongly Disagree)
+						<input type="radio" name="options1" value="1"> 1 (Strongly Disagree)
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" value="option2"> 2
+						<input type="radio" name="options1" value="2"> 2
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" value="option3"> 3
+						<input type="radio" name="options1" value="3"> 3
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" value="option4"> 4
+						<input type="radio" name="options1" value="4"> 4
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" value="option5"> 5 (Strongly Agree)
+						<input type="radio" name="options1" value="5"> 5 (Strongly Agree)
 					</label>
 				</div>
 				<div class= "questionDiv">
@@ -59,19 +59,19 @@
 						Your mind is always buzzing with unexplored ideas and plans.
 					</h4>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions2" value="option1"> 1 (Strongly Disagree)
+						<input type="radio" name="options2" value="1"> 1 (Strongly Disagree)
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions2" value="option2"> 2
+						<input type="radio" name="options2" value="2"> 2
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions2" value="option3"> 3
+						<input type="radio" name="options2" value="3"> 3
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions2" value="option4"> 4
+						<input type="radio" name="options2" value="4"> 4
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions2" value="option5"> 5 (Strongly Agree)
+						<input type="radio" name="options2" value="5"> 5 (Strongly Agree)
 					</label>
 				</div>
 				
@@ -80,6 +80,37 @@
 
 
 		</div>
-		<!-- My JS --><script type="text/javascript" src="js/logic.js"></script> 
+		<!-- My JS --><script type="text/javascript">
+
+
+			$(".btn-default").on("click", function(event){ 
+				var userName = $("#nameInput").val();
+				var userPhoto = $("#urlInput").val();
+				var userAnswers = [];
+				for (var i = 1; i <= 10; i++){
+					var grabText = "input[name=options" + i +"]:checked";
+					var q = $(grabText).val();
+					userAnswers.push(q);
+				}
+
+				var newFriendObj = {
+					name: userName, 
+					photoURL: userPhoto, 
+					scores: userAnswers
+				}
+
+				 
+
+    			// var q1 = $("input[name=options1]:checked").val();
+    			console.log(newFriendObj)
+
+				$.post("/api/friends", newFriendObj, function(response){
+					console.log(".post response: " + JSON.stringify(response, null, 2));
+				});
+
+
+				return false;
+			});
+		</script> 
 	</body>
 </html>
