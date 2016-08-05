@@ -35,26 +35,25 @@
 				
 			</form>
 		</div>
-<!-- 
-		<div class="modal fade" tabindex="-1" role="dialog" id="testModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Best Match</h4>
-      </div>
-      <div class="modal-body">
-        <h2 id="matchName">Name</h2>
-        <img id="matchImg" src="//response.photoURL" alt="//response.name">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
- -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="matchModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Best Match</h4>
+					</div>
+					<div class="modal-body">
+						<h2 id="matchName"></h2>
+						<img id="matchIMG">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
 		<!-- My JS --><script type="text/javascript">
 
 		var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
@@ -89,65 +88,27 @@
 			});
 
 			function modalIt(name, photo){
-			    //Modal container divs
-			  var modalMain = $("<div>").attr({
-			    class: "modal fade",
-			    id: "matchModal",
-			    tabindex: "-1",
-			    role:"dialog"
-			  });
-			  var modalDialog = $("<div>").attr({
-			    class: "modal-dialog",
-			    role:"document"
-			  });
-			  var modalContent = $("<div class = 'modal-content'>");
+				//Select Name and Image regions in the modal form
+				var modalMatchName = $("#matchName");
+				var modalIMG = $("#matchIMG");
 
-			  //Modal header
-			  var modalHeader = $("<div>").attr({
-			    class: "modal-header"
-			  });
-			  var headerText = $("<h4 class = 'modal-title'>").text("Best Match");
-			  modalHeader.append(headerText);
+				//Attach the name and image of the user's matched Friend
+				modalMatchName.text(name);
+				modalIMG.attr({
+					src: photo,
+					alt: name
+				});
 
-			  //Modal body
-			  var modalBody = $("<div class = 'modal-body'>");
-			  var modalMatchName = $("<div id = 'matchName'>").text(name);
-			  var modalIMG = $("<img>").attr({
-			    id:"matchImg",
-			    src: photo,
-			    alt: name
-			  });
-			  modalBody.append(modalMatchName);
-			  modalBody.append(modalIMG);
-
-			  //Modal Footer
-			  var modalFooter = $("<div class='modal-footer'>");
-			  var closeButton = $("<button>").attr({
-			    type:"button",
-			    class:"btn btn-default",
-			    "data-dismiss":"modal"
-			  });
-			  closeButton.text("Close");
-			  modalFooter.append(closeButton);
-
-			  //Putting it all together
-			  modalMain.append(modalDialog);
-			  modalMain.append(modalContent);
-			  modalMain.append(modalHeader);
-			  modalMain.append(modalBody);
-			  modalMain.append(modalFooter);
-
-			  $("body").append(modalMain);
-
-			  console.log("go modal!");
-			  $("#matchModal").modal("show");
+				//Activate the modal
+				console.log("go modal!");
+				$("#matchModal").modal("show");
 			}
 
 			function makeSurvey(inputArray){
 				var radioDiv = $("<div>");
 				var button = $("<button>").attr({
-				type:"submit",
-				class:"btn btn-default"
+					type:"submit",
+					class:"btn btn-default"
 				});
 				button.text("Submit");
 

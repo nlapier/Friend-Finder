@@ -6,8 +6,8 @@
         <h4 class="modal-title">Best Match</h4>
       </div>
       <div class="modal-body">
-        <h2 id="matchName">Name</h2>
-        <img id="matchImg" src="//response.photoURL" alt="//response.name">
+        <h2 id="matchName">**name***</h2>
+        <img id="matchIMG" ***src***alt***>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -16,33 +16,25 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class= "questionDiv">
-  <h3>
-    <strong>Question 1</strong>
-  </h3>
-  <h4>
-    Your mind is always buzzing with unexplored ideas and plans.
-  </h4>
-  <label class="radio-inline">
-    <input type="radio" name="options1" value="1"> 1 (Strongly Disagree)
-  </label>
-  <label class="radio-inline">
-    <input type="radio" name="options1" value="2"> 2
-  </label>
-  <label class="radio-inline">
-    <input type="radio" name="options1" value="3"> 3
-  </label>
-  <label class="radio-inline">
-    <input type="radio" name="options1" value="4"> 4
-  </label>
-  <label class="radio-inline">
-    <input type="radio" name="options1" value="5"> 5 (Strongly Agree)
-  </label>
-</div>
-
-
-
 <script type="text/javascript">
+
+
+function modalIt(name, photo){
+  //Select Name and Image regions in the modal form
+  var modalMatchName = $("#matchName")
+  var modalIMG = $("#matchIMG");
+
+  //Attach the name and image of the user's matched Friend
+  modalMatchName.text(name);
+  modalIMG.attr({
+    src: photo,
+    alt: name
+  });
+
+  //Activate the modal
+  console.log("go modal!");
+  $("#matchModal").modal("show");
+}
 
 function makeSurvey(inputArray){
   var radioDiv = $("<div>");
@@ -78,60 +70,31 @@ function makeSurvey(inputArray){
   $("form").append(button);
 }
 
-
-
-function modalIt(name, photo){
-  //Modal container divs
-  var modalMain = $("<div>").attr({
-    class: "modal-fade",
-    id: "matchModal",
-    tabindex: "-1",
-    role:"dialog"
-  });
-  var modalDialog = $("<div>").attr({
-    class: "modal-dialog",
-    role:"document"
-  });
-  var modalContent = $("<div class = 'modal-content'>");
-
-  //Modal header
-  var modalHeader = $("<div>").attr({
-    class: "modal-header"
-  });
-  var headerText = $("<h4 class = 'modal-title'>").text("Best Match");
-  modalHeader.append(headerText);
-
-  //Modal body
-  var modalBody = $("<div class = 'modal-body'>");
-  var modalMatchName = $("<div id = 'matchName'>").text(name);
-  var modalIMG = $("<img>").attr({
-    id:"matchImg",
-    src:photo,
-    alt:name
-  })
-  modalBody.append(modalMatchName);
-  modalBody.append(modalIMG);
-
-  //Modal Footer
-  var modalFooter = $("<div class='modal-footer'>");
-  var closeButton = $("<button>").attr({
-    type:"button",
-    class:"btn btn-default",
-    data-dismiss:"modal"
-  });
-  closeButton.text("Close");
-  modalFooter.append(closeButton);
-
-  //Putting it all together
-  modalMain.append(modalDialog);
-  modalMain.append(modalContent);
-  modalMain.append(modalHeader);
-  modalMain.append(modalBody);
-  modalMain.append(modalFooter);
-
-  $('#matchModal').modal(options);
-}
-
-
-
 </script>
+
+<div class= "questionDiv">
+  <h3>
+    <strong>Question 1</strong>
+  </h3>
+  <h4>
+    Your mind is always buzzing with unexplored ideas and plans.
+  </h4>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="1"> 1 (Strongly Disagree)
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="2"> 2
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="3"> 3
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="4"> 4
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="options1" value="5"> 5 (Strongly Agree)
+  </label>
+</div>
+
+
+

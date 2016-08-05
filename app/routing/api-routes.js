@@ -5,18 +5,19 @@ Your api-routes.js file should contain two routes:
 */
 
 //Dependencies
-var friendsArray = require("../data/friends.js")
-var Friend = require("../public/js/logic.js")
+var friendsArray = require("../data/friends.js");
+var Friend = require("../public/js/logic.js");
 
 module.exports = function(app){
+
 	app.get("/api/friends", function(request, response){
-		response.json(friendsArray)
+		response.json(friendsArray);
 	});
 
 	app.post("/api/friends", function(request, response){
 		// //Add new user object
 		var incoming = request.body;
-		var friendObj = new Friend (incoming.name, incoming.photoURL, incoming.scores)
+		var friendObj = new Friend (incoming.name, incoming.photoURL, incoming.scores);
 		console.log("friendObj: " + JSON.stringify(friendObj, null, 2));
 
 		//run totalDifference(
@@ -29,7 +30,6 @@ module.exports = function(app){
 		//Send back the matched user
 		response.json(friendObj.bestMatch);
 	});
-
 }
 
 
