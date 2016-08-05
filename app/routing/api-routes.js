@@ -6,9 +6,14 @@ Your api-routes.js file should contain two routes:
 
 //Dependencies
 var friendsArray = require("../data/friends.js");
+var questionsArray = require("../data/questions.js");
 var Friend = require("../public/js/logic.js");
 
 module.exports = function(app){
+
+	app.get("/api/questions", function(request, response){
+		response.json(questionsArray);
+	});
 
 	app.get("/api/friends", function(request, response){
 		response.json(friendsArray);

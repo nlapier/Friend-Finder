@@ -55,9 +55,13 @@
 		</div><!-- /.modal -->
 
 		<!-- My JS --><script type="text/javascript">
-
-		var arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
-		$(document).ready(makeSurvey(arr));
+		$(document).ready(function(){
+			var arr;
+			$.get("api/questions", function(data) {
+				console.log(data);
+				makeSurvey(data);
+			});
+		});
 
 			$(".btn-default").on("click", function(event){ 
 				var userName = $("#nameInput").val();
