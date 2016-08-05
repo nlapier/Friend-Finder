@@ -55,13 +55,13 @@
 		</div><!-- /.modal -->
 
 		<!-- My JS --><script type="text/javascript">
-		$(document).ready(function(){
-			var arr;
-			$.get("api/questions", function(data) {
-				console.log(data);
-				makeSurvey(data);
+			$(document).ready(function(){
+				var arr;
+				$.get("api/questions", function(data) {
+					console.log(data);
+					makeSurvey(data);
+				});
 			});
-		});
 
 			$(".btn-default").on("click", function(event){ 
 				var userName = $("#nameInput").val();
@@ -79,8 +79,8 @@
 					scores: userAnswers
 				}
 
-    			// var q1 = $("input[name=options1]:checked").val();
-    			console.log("newFriendObj: " + JSON.stringify(newFriendObj, null, 2))
+				// var q1 = $("input[name=options1]:checked").val();
+				console.log("newFriendObj: " + JSON.stringify(newFriendObj, null, 2))
 
 				$.post("/api/friends", newFriendObj, function(response){
 					console.log(".post response: " + JSON.stringify(response, null, 2));
